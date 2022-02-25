@@ -64,6 +64,7 @@ function handleCardClick(event) {
 
   let currentCard = event.target;
   currentCard.style.backgroundColor = currentCard.classList[0];
+  currentCard.innerText = currentCard.classList[0];
 
   if(!card1 || !card2) {
     currentCard.classList.add('flipped');

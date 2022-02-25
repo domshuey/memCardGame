@@ -11,3 +11,8 @@ h1 {
   display: inline-block;
   border-radius: 5px;
 }
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: lightslategray;
+}
