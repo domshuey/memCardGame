@@ -14,12 +14,16 @@ const COLORS = [
   "blue",
   "green",
   "orange",
-  "purple"
+  "purple",
+  "teal",
+  "black",
+  "pink",
+  "teal",
+  "black",
+  "pink",
 ];
 
-// here is a helper function to shuffle an array
-// it returns the same array with values shuffled
-// it is based on an algorithm called Fisher Yates if you want it research more
+
 function shuffle(array) {
   let counter = array.length;
 
@@ -42,57 +46,58 @@ function shuffle(array) {
 
 let shuffledColors = shuffle(COLORS);
 
-// this function loops over the array of colors
-// it creates a new div and gives it a class with the value of the color
-// it also adds an event listener for a click for each card
 function createDivsForColors(colorArray) {
   for (let color of colorArray) {
-    // create a new div
     const newDiv = document.createElement("div");
     newDiv.classList.add(color);
-    newDiv.addEventListener('click', handleCardClick);
+    newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
-  }};
+  }
+}
 
-    function handleCardClick(event){
-        if(noClicking) return;
-        if(event.target.classList.contains('flipped')) return;
-        let currentCard = event.target;
-        currentCard.style.nbackgroundColor = currentCard.classList[0];
-        
-        if(!card1 || !card2){
-            currentCard.classList.add('flipped');
-            card1 = card2 || currentCard;
-            card2 = currentCard === card1 ? null : currentCard;
-        }
-        if(card1 && card2){
-            noClicking = true;
-            let gif1 = card1.className;
-            let gif2 = card2.className;
-        
-        if(gif1 === gif2){
-            cardsFlipped += 2;
-            card1.removeEventListener('click', handleCardClick);
-            card2.removeEventListener('click', handleCardClick);
-            card1 = null;
-            card2 = null;
-            noClicking = false;
-        }
-        else {
-            setTimeout(function(){
-                card1.style.backgroundColor = '';
-                card2.style.backgroundColor = '';
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-                card1 = null;
-                card2 = null;
-                noClicking = false;
-            }, 750);
-        }
-    }
-        if(cardsFlipped === COLORS.length) alert ('YOU WIN!');
+// TODO: Implement this function!
+function handleCardClick(event) {
+  console.log("you just clicked", event.target);
 
+  if(noClicking) return;
+  if(event.target.classList.contains('flipped')) return;
+
+  let currentCard = event.target;
+  currentCard.style.backgroundColor = currentCard.classList[0];
+
+  if(!card1 || !card2) {
+    currentCard.classList.add('flipped');
+    card1 = card1 || currentCard;
+    card2 = currentCard === card1 ? null : currentCard;
+  }
+
+  if(card1 && card2){
+    noClicking = true;
+    let gif1 = card1.className;
+    let gif2 = card2.className;
+
+    if(gif1 === gif2){
+      cardsFlipped += 2;
+      card1.removeEventListener('click', handleCardClick);
+      card2.removeEventListener('click', handleCardClick);
+      card1 = null;
+      card2 = null;
+      noClicking = false;
+    } else {
+      setTimeout(function(){
+        card1.style.backgroundColor = '';
+        card2.style.backgroundColor = '';
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        card1 = null;
+        card2 = null;
+        noClicking = false;
+      }, 1000);
+      }
     }
+    if(cardsFlipped === COLORS.length) alert ('YOU WIN!');
+  }
+
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
