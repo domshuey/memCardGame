@@ -92,7 +92,7 @@ function handleCardClick(event) {
         card1 = null;
         card2 = null;
         noClicking = false;
-      }, 1000);
+      }, 500);
       }
     }
     if(cardsFlipped === COLORS.length) alert ('YOU WIN!');
